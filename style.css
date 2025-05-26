@@ -1,0 +1,216 @@
+:root {
+    --primary-color: #007AFF; /* Apple Blue */
+    --background-color: #f0f2f5; /* Light grey */
+    --card-background-color: #ffffff;
+    --text-color: #1d1d1f; /* Nearly black */
+    --secondary-text-color: #6e6e73; /* Grey for subtitles */
+    --border-color: #d2d2d7;
+    --success-color: #34C759; /* Apple Green */
+    --error-color: #FF3B30;   /* Apple Red */
+    --font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align top */
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 650px;
+    background-color: var(--card-background-color);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    padding: 30px 40px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 25px;
+}
+
+/* Loading Screen */
+#loading-screen {
+    padding: 40px 0;
+    text-align: center;
+}
+#loading-screen.hidden, #game-area.hidden, .feedback.hidden, .explanation.hidden, #error-area.hidden {
+    display: none;
+}
+#loading-screen.active {
+    display: block;
+}
+.spinner {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid var(--primary-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+#loading-screen p {
+    font-size: 1.1rem;
+    color: var(--secondary-text-color);
+}
+
+
+/* Question Card */
+.question-card {
+    margin-bottom: 25px;
+    padding: 20px;
+    background-color: #f9f9f9; /* Slightly off-white for card within card */
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.sequence-label {
+    font-size: 1rem;
+    color: var(--secondary-text-color);
+    margin-bottom: 15px;
+}
+
+.sequence-display-box {
+    font-size: 1.8rem;
+    font-weight: 500;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: var(--card-background-color);
+    border-radius: 8px;
+    min-height: 40px;
+    letter-spacing: 2px;
+    border: 1px solid #e0e0e0;
+    color: var(--primary-color);
+}
+
+.answer-form {
+    display: flex;
+    gap: 10px;
+}
+
+#answer-input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-sizing: border-box;
+    text-align: center;
+}
+#answer-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
+}
+
+button {
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+button:hover {
+    background-color: #005bb5; /* Darker blue */
+}
+button:active {
+    transform: scale(0.98);
+}
+button:disabled {
+    background-color: #c7c7cc;
+    cursor: not-allowed;
+}
+
+
+/* Feedback Area */
+.feedback {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+.feedback.correct {
+    background-color: #e6f6e9; /* Light green */
+    color: var(--success-color);
+    border: 1px solid var(--success-color);
+}
+.feedback.incorrect {
+    background-color: #ffeeed; /* Light red */
+    color: var(--error-color);
+    border: 1px solid var(--error-color);
+}
+.feedback.error { /* For API errors */
+    background-color: #fff0f0;
+    color: var(--error-color);
+    border: 1px solid var(--error-color);
+}
+
+/* Explanation Area */
+.explanation {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+.explanation h2 {
+    font-size: 1.3rem;
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.explanation p {
+    font-size: 1rem;
+    color: var(--secondary-text-color);
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+.explanation #oeis-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+.explanation #oeis-link:hover {
+    text-decoration: underline;
+}
+#next-question-button {
+    margin-top: 15px;
+    background-color: var(--success-color);
+}
+#next-question-button:hover {
+    background-color: #28a745; /* Darker green */
+}
+
+footer {
+    margin-top: 30px;
+    font-size: 0.85rem;
+    color: var(--secondary-text-color);
+}
+footer a {
+    color: var(--secondary-text-color);
+    text-decoration: none;
+}
+footer a:hover {
+    text-decoration: underline;
+}
